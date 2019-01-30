@@ -12,10 +12,12 @@ import com.cor.cep.util.RandomTemperatureEventGenerator;
  */
 public class StartDemo {
 
-    /** Logger */
+    /**
+     * Logger
+     */
     private static Logger LOG = LoggerFactory.getLogger(StartDemo.class);
 
-    
+
     /**
      * Main method - start the Demo!
      */

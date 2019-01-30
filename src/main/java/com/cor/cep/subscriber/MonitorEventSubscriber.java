@@ -18,6 +18,7 @@ public class MonitorEventSubscriber implements StatementSubscriber {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getStatement() {
 
         // Example of simple EPL with a Time Window

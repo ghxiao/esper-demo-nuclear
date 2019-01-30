@@ -21,12 +21,16 @@ import com.espertech.esper.client.EPStatement;
  */
 @Component
 @Scope(value = "singleton")
-public class TemperatureEventHandler implements InitializingBean{
+public class TemperatureEventHandler implements InitializingBean {
 
-    /** Logger */
+    /**
+     * Logger
+     */
     private static Logger LOG = LoggerFactory.getLogger(TemperatureEventHandler.class);
 
-    /** Esper service */
+    /**
+     * Esper service
+     */
     private EPServiceProvider epService;
     private EPStatement criticalEventStatement;
     private EPStatement warningEventStatement;
@@ -66,7 +70,6 @@ public class TemperatureEventHandler implements InitializingBean{
      * temperature
      */
     private void createCriticalTemperatureCheckExpression() {
-        
         LOG.debug("create Critical Temperature Check Expression");
         criticalEventStatement = epService.getEPAdministrator().createEPL(criticalEventSubscriber.getStatement());
         criticalEventStatement.setSubscriber(criticalEventSubscriber);
@@ -77,7 +80,6 @@ public class TemperatureEventHandler implements InitializingBean{
      * listener.
      */
     private void createWarningTemperatureCheckExpression() {
-
         LOG.debug("create Warning Temperature Check Expression");
         warningEventStatement = epService.getEPAdministrator().createEPL(warningEventSubscriber.getStatement());
         warningEventStatement.setSubscriber(warningEventSubscriber);
@@ -87,7 +89,6 @@ public class TemperatureEventHandler implements InitializingBean{
      * EPL to monitor the average temperature every 10 seconds. Will call listener on every event.
      */
     private void createTemperatureMonitorExpression() {
-
         LOG.debug("create Timed Average Monitor");
         monitorEventStatement = epService.getEPAdministrator().createEPL(monitorEventSubscriber.getStatement());
         monitorEventStatement.setSubscriber(monitorEventSubscriber);
@@ -105,7 +106,7 @@ public class TemperatureEventHandler implements InitializingBean{
 
     @Override
     public void afterPropertiesSet() {
-        
+
         LOG.debug("Configuring..");
         initService();
     }
