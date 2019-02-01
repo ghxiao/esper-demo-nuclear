@@ -8,8 +8,8 @@
 	<description>Simple demo of Complex Event Processing (CEP) using the ESPER libraries.</description>
 
 	<properties>
-		<esper-version>4.7.0</esper-version>
-		<spring-version>3.1.1.RELEASE</spring-version>
+		<esper-version>7.1.0</esper-version>
+		<spring-version>5.1.4.RELEASE</spring-version>
 	</properties>
 
 	<dependencies>
@@ -31,11 +31,6 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
-			<version>${spring-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-asm</artifactId>
 			<version>${spring-version}</version>
 		</dependency>
 		<dependency>
@@ -90,7 +85,7 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
+				<version>3.8.0</version>
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
@@ -99,6 +94,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.6.0</version>
 				<configuration>
 					<mainClass>com.cor.cep.StartDemo</mainClass>
 					<includePluginDependencies>false</includePluginDependencies>
@@ -111,34 +107,5 @@
 		</plugins>
 	</build>
 
-
-	<repositories>
-		<repository>
-			<id>codehaus</id>
-			<name>Codehaus Release Repo</name>
-			<url>http://dist.codehaus.org/</url>
-		</repository>
-		<repository>
-			<id>codehaus-snapshot</id>
-			<name>Codehaus Snapshot Repo</name>
-			<url>http://snapshots.repository.codehaus.org</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-		</repository>
-	</repositories>
-
-	<pluginRepositories>
-		<pluginRepository>
-			<id>codehaus</id>
-			<name>Codehaus Release Repo</name>
-			<url>http://repository.codehaus.org</url>
-		</pluginRepository>
-		<pluginRepository>
-			<id>codehaus-snapshot</id>
-			<name>Codehaus Snapshot Repo</name>
-			<url>http://snapshots.repository.codehaus.org</url>
-		</pluginRepository>
-	</pluginRepositories>
 
 </project>
