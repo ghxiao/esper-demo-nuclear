@@ -10,16 +10,13 @@ public class TemperatureEvent {
 
     /** Temperature in Celcius. */
     private int temperature;
-    
+
     /** Time temerature reading was taken. */
     private Date timeOfReading;
-    
+
+
     /**
-     * Single value constructor.
-     * @param value Temperature in Celsius.
-     */
-    /**
-     * Temeratur constructor.
+     * Temperature constructor.
      * @param temperature Temperature in Celsius
      * @param timeOfReading Time of Reading
      */
@@ -35,7 +32,7 @@ public class TemperatureEvent {
     public int getTemperature() {
         return temperature;
     }
-       
+
     /**
      * Get time Temperature reading was taken.
      * @return Time of Reading

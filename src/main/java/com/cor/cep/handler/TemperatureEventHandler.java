@@ -32,21 +32,21 @@ public class TemperatureEventHandler implements InitializingBean {
      * Esper service
      */
     private EPServiceProvider epService;
-    private EPStatement criticalEventStatement;
-    private EPStatement warningEventStatement;
-    private EPStatement monitorEventStatement;
+
+    private final StatementSubscriber criticalEventSubscriber;
+
+    private final StatementSubscriber warningEventSubscriber;
+
+    private final StatementSubscriber monitorEventSubscriber;
 
     @Autowired
-    @Qualifier("criticalEventSubscriber")
-    private StatementSubscriber criticalEventSubscriber;
-
-    @Autowired
-    @Qualifier("warningEventSubscriber")
-    private StatementSubscriber warningEventSubscriber;
-
-    @Autowired
-    @Qualifier("monitorEventSubscriber")
-    private StatementSubscriber monitorEventSubscriber;
+    public TemperatureEventHandler(@Qualifier("criticalEventSubscriber") StatementSubscriber criticalEventSubscriber,
+                                   @Qualifier("warningEventSubscriber") StatementSubscriber warningEventSubscriber,
+                                   @Qualifier("monitorEventSubscriber") StatementSubscriber monitorEventSubscriber) {
+        this.criticalEventSubscriber = criticalEventSubscriber;
+        this.warningEventSubscriber = warningEventSubscriber;
+        this.monitorEventSubscriber = monitorEventSubscriber;
+    }
 
     /**
      * Configure Esper Statement(s).
@@ -71,7 +71,7 @@ public class TemperatureEventHandler implements InitializingBean {
      */
     private void createCriticalTemperatureCheckExpression() {
         LOG.debug("create Critical Temperature Check Expression");
-        criticalEventStatement = epService.getEPAdministrator().createEPL(criticalEventSubscriber.getStatement());
+        EPStatement criticalEventStatement = epService.getEPAdministrator().createEPL(criticalEventSubscriber.getStatement());
         criticalEventStatement.setSubscriber(criticalEventSubscriber);
     }
 
@@ -81,7 +81,7 @@ public class TemperatureEventHandler implements InitializingBean {
      */
     private void createWarningTemperatureCheckExpression() {
         LOG.debug("create Warning Temperature Check Expression");
-        warningEventStatement = epService.getEPAdministrator().createEPL(warningEventSubscriber.getStatement());
+        EPStatement warningEventStatement = epService.getEPAdministrator().createEPL(warningEventSubscriber.getStatement());
         warningEventStatement.setSubscriber(warningEventSubscriber);
     }
 
@@ -90,7 +90,7 @@ public class TemperatureEventHandler implements InitializingBean {
      */
     private void createTemperatureMonitorExpression() {
         LOG.debug("create Timed Average Monitor");
-        monitorEventStatement = epService.getEPAdministrator().createEPL(monitorEventSubscriber.getStatement());
+        EPStatement monitorEventStatement = epService.getEPAdministrator().createEPL(monitorEventSubscriber.getStatement());
         monitorEventStatement.setSubscriber(monitorEventSubscriber);
     }
 

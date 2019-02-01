@@ -31,13 +31,11 @@ public class MonitorEventSubscriber implements StatementSubscriber {
     public void update(Map<String, Double> eventMap) {
 
         // average temp over 10 secs
-        Double avg = (Double) eventMap.get("avg_val");
+        Double avg = eventMap.get("avg_val");
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("---------------------------------");
-        sb.append("\n- [MONITOR] Average Temp = " + avg);
-        sb.append("\n---------------------------------");
-
-        LOG.debug(sb.toString());
+        String sb = "---------------------------------" +
+                "\n- [MONITOR] Average Temp = " + avg +
+                "\n---------------------------------";
+        LOG.debug(sb);
     }
 }

@@ -25,8 +25,12 @@ public class RandomTemperatureEventGenerator {
     private static Logger LOG = LoggerFactory.getLogger(RandomTemperatureEventGenerator.class);
 
     /** The TemperatureEventHandler - wraps the Esper engine and processes the Events  */
+    private final TemperatureEventHandler temperatureEventHandler;
+
     @Autowired
-    private TemperatureEventHandler temperatureEventHandler;
+    public RandomTemperatureEventGenerator(TemperatureEventHandler temperatureEventHandler) {
+        this.temperatureEventHandler = temperatureEventHandler;
+    }
 
     /**
      * Creates simple random Temperature events and lets the implementation class handle them.
@@ -55,12 +59,10 @@ public class RandomTemperatureEventGenerator {
 
 
     private String getStartingMessage(){
-        StringBuilder sb = new StringBuilder();
-        sb.append("\n\n************************************************************");
-        sb.append("\n* STARTING - ");
-        sb.append("\n* PLEASE WAIT - TEMPERATURES ARE RANDOM SO MAY TAKE");
-        sb.append("\n* A WHILE TO SEE WARNING AND CRITICAL EVENTS!");
-        sb.append("\n************************************************************\n");
-        return sb.toString();
+        return "\n\n************************************************************" +
+                "\n* STARTING - " +
+                "\n* PLEASE WAIT - TEMPERATURES ARE RANDOM SO MAY TAKE" +
+                "\n* A WHILE TO SEE WARNING AND CRITICAL EVENTS!" +
+                "\n************************************************************\n";
     }
 }

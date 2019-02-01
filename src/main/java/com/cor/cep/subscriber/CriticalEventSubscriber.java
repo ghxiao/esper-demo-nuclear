@@ -29,10 +29,12 @@ public class CriticalEventSubscriber implements StatementSubscriber {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getStatement() {
 
         // Example using 'Match Recognise' syntax.
-        String crtiticalEventExpression = "select * from TemperatureEvent "
+
+        return "select * from TemperatureEvent "
                 + "match_recognize ( "
                 + "       measures A as temp1, B as temp2, C as temp3, D as temp4 "
                 + "       pattern (A B C D) "
@@ -41,8 +43,6 @@ public class CriticalEventSubscriber implements StatementSubscriber {
                 + "               B as (A.temperature < B.temperature), "
                 + "               C as (B.temperature < C.temperature), "
                 + "               D as (C.temperature < D.temperature) and D.temperature > (A.temperature * " + CRITICAL_EVENT_MULTIPLIER + ")" + ")";
-
-        return crtiticalEventExpression;
     }
 
     /**
@@ -59,13 +59,11 @@ public class CriticalEventSubscriber implements StatementSubscriber {
         // 4th Temperature in the Critical Sequence
         TemperatureEvent temp4 = eventMap.get("temp4");
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("***************************************");
-        sb.append("\n* [ALERT] : CRITICAL EVENT DETECTED! ");
-        sb.append("\n* " + temp1 + " > " + temp2 + " > " + temp3 + " > " + temp4);
-        sb.append("\n***************************************");
-
-        LOG.debug(sb.toString());
+        String sb = "***************************************" +
+                "\n* [ALERT] : CRITICAL EVENT DETECTED! " +
+                "\n* " + temp1 + " > " + temp2 + " > " + temp3 + " > " + temp4 +
+                "\n***************************************";
+        LOG.debug(sb);
     }
 
 
